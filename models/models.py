@@ -81,10 +81,13 @@ def book_place(date, user_id: int, place_id: int):
 def get_user_places(user_id):
     with Session(engine) as session:
         result = session.scalars(select(Booking).where(Booking.person_id == user_id))
-        return [x.person.fullname for x in result]
+        data = [{'name': x.person.fullname, 'dept': x.person.department, 'dt': x.booked_at, 'place': x.place.placename} for x in result]
+        if data:
+            return data
+        return False
+        
 
-
-print(get_user_places(4))
+print(get_user_places(49))
 
 
 
