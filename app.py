@@ -1,5 +1,6 @@
 from dash import Dash, page_container, dcc, html
 import dash_bootstrap_components as dbc
+from flask import jsonify
 
 app = Dash(
     __name__, 
@@ -8,6 +9,12 @@ app = Dash(
     suppress_callback_exceptions=True,
     external_stylesheets=[dbc.themes.COSMO, dbc.icons.BOOTSTRAP]
 )
+
+# Добавьте healthcheck endpoint
+@app.server.route('/health')
+def health():
+    return jsonify({'status': 'healthy'}), 200
+
 
 app.layout = dbc.Container([
     dcc.Store(id='common-store-user_name', data={'username': 0}),

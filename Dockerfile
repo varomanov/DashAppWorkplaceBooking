@@ -23,7 +23,8 @@ USER appuser
 
 EXPOSE 8050
 
+# Упрощенный healthcheck - проверяет, что порт слушается
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:8050/_stcore/health || exit 1
+    CMD curl -f http://localhost:8050/ || exit 1
 
-ENTRYPOINT ["python", "app.py", "--server.port=8050", "--server.address=0.0.0.0"]
+CMD ["python", "app.py"]
