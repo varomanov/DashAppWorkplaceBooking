@@ -21,9 +21,9 @@ COPY . .
 RUN useradd -m -r appuser && chown -R appuser /app
 USER appuser
 
-EXPOSE 8501
+EXPOSE 8050
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
     CMD curl -f http://localhost:8501/_stcore/health || exit 1
 
-ENTRYPOINT ["python", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["python", "app.py", "--server.port=8050", "--server.address=0.0.0.0"]

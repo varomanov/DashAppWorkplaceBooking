@@ -78,7 +78,13 @@ def book_place(date, user_id: int, place_id: int):
         return True
 
 
+def get_user_places(user_id):
+    with Session(engine) as session:
+        result = session.scalars(select(Booking).where(Booking.person_id == user_id))
+        return [x.person.fullname for x in result]
 
+
+print(get_user_places(4))
 
 
 
