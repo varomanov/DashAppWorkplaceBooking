@@ -77,6 +77,23 @@ def book_place(date, user_id: int, place_id: int):
         session.commit()
         return True
 
+def remove_place(row_id: int):
+    with Session(engine) as session:
+        # Сначала получаем объект
+        booking = session.scalar(
+            select(Booking).where(
+                Booking.id == row_id  # если нужен конкретный ID
+            )
+        )
+        
+        if booking is None:
+            return False
+        
+        # Удаляем объект
+        session.delete(booking)
+        session.commit()
+        return True
+
 
 def get_user_places(user_id):
     with Session(engine) as session:
