@@ -14,4 +14,5 @@ app.layout = dbc.Container([
 ], fluid=True, class_name='d-flex flex-column col-md-5 px-0', style={'height': '100dvh', 'backgroundColor': '#fff'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(port=8501, host='0.0.0.0')
