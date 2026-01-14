@@ -10,5 +10,5 @@ register_page(
 layout = dbc.Container([
    utils.app_header('КИР'),
    html.Div(utils.app_footer(4), className='mt-auto')
-], fluid=True, style={'height': '100vh'}, class_name='d-flex flex-column')
+], fluid=True, style={'height': '100dvh'}, class_name='d-flex flex-column')
 

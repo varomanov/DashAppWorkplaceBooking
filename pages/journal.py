@@ -17,7 +17,7 @@ layout = dbc.Container([
        dbc.Tab(html.Div(id='journal-places-all'), label='Всего отдела'),
    ], class_name='mt-3 fw-bold'),
    html.Div(utils.app_footer(2), className='mt-auto')
-], fluid=True, style={'height': '100vh'}, class_name='d-flex flex-column')
+], fluid=True, style={'height': '100dvh'}, class_name='d-flex flex-column')
 
 @callback(
     Output('journal-places-my', 'children'),

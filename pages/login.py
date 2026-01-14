@@ -17,7 +17,7 @@ layout = dbc.Container([
         placeholder='Ваше имя'
     ),
     dbc.Button('Войти', id='login-btn-enter', disabled=True, color='secondary', href='/booking')
-], fluid=True, class_name='d-flex flex-column justify-content-center align-items-center', style={'height': '100vh'})
+], fluid=True, class_name='d-flex flex-column justify-content-center align-items-center', style={'height': '100dvh'})
 
 @callback(
     Output('common-store-user_name', 'data'),
