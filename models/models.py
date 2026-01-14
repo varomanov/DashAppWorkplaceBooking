@@ -81,14 +81,18 @@ def book_place(date, user_id: int, place_id: int):
 def get_user_places(user_id):
     with Session(engine) as session:
         result = session.scalars(select(Booking).where(Booking.person_id == user_id))
-        data = [{'name': x.person.fullname, 'dept': x.person.department, 'dt': x.booked_at, 'place': x.place.placename} for x in result]
+        data = [{'name': x.person.fullname, 'dept': x.person.department, 'dt': x.booked_at, 'place': x.place.placename, 'row_id': x.id} for x in result]
         if data:
             return data
         return False
-        
 
-print(get_user_places(49))
-
+def get_all_booked_places():
+    with Session(engine) as session:
+        result = session.scalars(select(Booking).where(Booking.person_id > 0))
+        data = [{'name': x.person.fullname, 'dept': x.person.department, 'dt': x.booked_at, 'place': x.place.placename, 'row_id': x.id, 'user_id': x.person_id} for x in result]
+        if data:
+            return data
+        return False
 
 
 if __name__ == '__main__':
