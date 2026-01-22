@@ -14,5 +14,5 @@ def app_footer(id=1):
         dbc.Col(dcc.Link(['Бронь', html.Br(), html.I(className='bi bi-house-fill fs-2')], href='/booking', className=f'{"text-primary" if id==1 else "text-secondary"}'), width='auto', class_name='text-center'),
         dbc.Col(dcc.Link(['Журнал', html.Br(), html.I(className='bi bi-book-fill fs-2')], href='/journal', className=f'{"text-primary" if id==2 else "text-secondary"}'), width='auto', class_name='text-center'),
         dbc.Col(dcc.Link(['Этажи', html.Br(), html.I(className='bi bi-stack fs-2')], href='/floor', className=f'{"text-primary" if id==3 else "text-secondary"}'), width='auto', class_name='text-center'),
-        dbc.Col(dcc.Link(['КИР', html.Br(), html.I(className='bi bi-person-workspace fs-2')], href='/personal', className=f'{"text-primary" if id==4 else "text-secondary"}'), width='auto', class_name='text-center'),
+        dbc.Col(dcc.Link(['График', html.Br(), html.I(className='bi bi-person-workspace fs-2')], href='/personal', className=f'{"text-primary" if id==4 else "text-secondary"}'), width='auto', class_name='text-center'),
     ], justify='between', align='center', className='footer_div pt-2', style={'borderTop': '2px solid orangered'})

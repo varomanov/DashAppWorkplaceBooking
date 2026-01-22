@@ -7,7 +7,7 @@ app = Dash(
     use_pages=True, 
     prevent_initial_callbacks=True, 
     suppress_callback_exceptions=True,
-    external_stylesheets=[dbc.themes.COSMO, dbc.icons.BOOTSTRAP]
+    external_stylesheets=[dbc.themes.JOURNAL, dbc.icons.BOOTSTRAP]
 )
 
 # Добавьте healthcheck endpoint
@@ -17,7 +17,7 @@ def health():
 
 
 app.layout = dbc.Container([
-    dcc.Store(id='common-store-user_name', data={'username': 0}),
+    dcc.Store(id='common-store-user_name', data={'username': 0}, storage_type='session'),
     page_container
 ], fluid=True, class_name='d-flex flex-column col-md-5 px-0', style={'height': '100dvh', 'backgroundColor': '#fff'})
 
