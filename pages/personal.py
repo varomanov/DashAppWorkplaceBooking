@@ -4,6 +4,10 @@ from components import utils
 import plotly.express as px
 from models.models import engine
 import pandas as pd
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+import dash_echarts as echarts
+
 
 register_page(
     __name__,
@@ -22,11 +26,50 @@ layout = dbc.Container([
 )
 def update_chart(data):
     df = pd.read_sql(
-        '''select booked_at, count(*) as 'value'
-        from bookings 
-        where person_id > 0 
-        group by booked_at''', 
-    engine)
-    fig = px.bar(data_frame=df, x='booked_at', y='value', color='booked_at', height=600)
-    fig.update_layout(title='Динамика бронирования по дням', xaxis_title='Дни', yaxis_title='Кол-во сотрудников')
-    return dcc.Graph(figure=fig)
+        '''select booked_at, count(*) as value
+           from bookings 
+           where person_id > 0 
+           group by booked_at''',
+        engine
+    )
+
+    option = {
+        "title": {"text": "Динамика бронирования по дням"},
+        "tooltip": {},
+        "legend": {"bottom": 0},
+        "grid": {"left": 30},
+
+        # 🔥 ПАЛИТРА ЦВЕТОВ
+        "color": [
+            "#5470C6", "#91CC75", "#FAC858", "#EE6666",
+            "#73C0DE", "#3BA272", "#FC8452", "#9A60B4",
+            "#EA7CCC", "#FF9F7F", "#8378EA", "#96BFFF"
+        ],
+
+        "xAxis": {
+            "type": "category",
+            "name": "Дни",
+            "data": df["booked_at"].astype(str).tolist()
+        },
+        "yAxis": {
+            "type": "value",
+            "name": "Кол-во сотрудников",
+            "nameLocation": "middle",
+            "nameGap": 50
+        },
+        "series": [
+            {
+                "name": "Дата бронирования",
+                "type": "bar",
+                "color": 'darkblue',
+                "data": df["value"].tolist()
+            }
+        ]
+    }
+
+
+
+    return echarts.DashECharts(
+        option=option,
+        style={"height": "400px", "width": "100%"}
+    )
